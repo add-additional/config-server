@@ -25,7 +25,7 @@ elastic-query-web-client:
   query-by-text:
     method: POST
     uri: "/get-document-by-text"
-    accept: ${elasticsearch-query-web-client.webclient.accept-type}
+    accept: ${elastic-query-web-client.webclient.accept-type}
 
 spring:
   thymeleaf:
