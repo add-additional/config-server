@@ -25,19 +25,19 @@ spring:
           lowerCaseServiceId: true
       routes:
         - id: elasticsearch-query-web-client
-            uri: lb://elasticsearch-query-web-client
-            predicates:
-              - Path=/elasticsearch-query-web-client/**
-            filters:
-              - RewritePath=/elastic-query-service/(?<path>.*), /$\{path}
-              - name: RequestRateLimiter
-                args:
-                  redis-rate-limiter.replenishRate: 5
-                  redis-rate-limiter.burstCapacity: 10
-              - name: CircuitBreaker
-                args:
-                  name: queryServiceCircuitBreaker
-                  fallbackUri: forward:/fallback/query-fallback
+          uri: lb://elasticsearch-query-web-client
+          predicates:
+            - Path=/elasticsearch-query-web-client/**
+          filters:
+            - RewritePath=/elastic-query-service/(?<path>.*), /$\{path}
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 5
+                redis-rate-limiter.burstCapacity: 10
+            - name: CircuitBreaker
+              args:
+                name: queryServiceCircuitBreaker
+                fallbackUri: forward:/fallback/query-fallback
         - id: elasticsearch-query-service
           uri: lb://elasticsearch-query-service
           predicates:
